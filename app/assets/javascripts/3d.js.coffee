@@ -15,24 +15,32 @@ windowHalfY = window.innerHeight / 2
 
 init = ->
   $container = $('#container')
+
   camera = new THREE.PerspectiveCamera(20, window.innerWidth / window.innerHeight, 1, 10000)
   camera.position.z = 1800
+
   scene = new THREE.Scene()
+
   light = new THREE.DirectionalLight(0xffffff)
   light.position.set 0, 0, 1
   light.position.normalize()
+
   scene.add light
+
   shadowMaterial = new THREE.MeshBasicMaterial(map: THREE.ImageUtils.loadTexture("textures/shadow.png"))
   shadowGeo = new THREE.PlaneGeometry(300, 300, 1, 1)
+
   mesh = new THREE.Mesh(shadowGeo, shadowMaterial)
   mesh.position.y = -250
   mesh.rotation.x = -90 * Math.PI / 180
   scene.add mesh
+
   mesh = new THREE.Mesh(shadowGeo, shadowMaterial)
   mesh.position.y = -250
   mesh.position.x = -400
   mesh.rotation.x = -90 * Math.PI / 180
   scene.add mesh
+
   mesh = new THREE.Mesh(shadowGeo, shadowMaterial)
   mesh.position.y = -250
   mesh.position.x = 400
@@ -73,6 +81,7 @@ init = ->
       f3.vertexColors[j] = color
       j++
     i++
+
   materials = [ new THREE.MeshLambertMaterial(
     color: 0xffffff
     shading: THREE.FlatShading
@@ -83,29 +92,35 @@ init = ->
     wireframe: true
     transparent: true
   ) ]
+
   group1 = THREE.SceneUtils.createMultiMaterialObject(geometry, materials)
   group1.position.x = -400
   group1.rotation.x = -1.87
   group1.scale.set 200, 200, 200
   scene.add group1
+
   group2 = THREE.SceneUtils.createMultiMaterialObject(geometry2, materials)
   group2.position.x = 400
   group2.rotation.x = 0
   group2.scale = group1.scale
   scene.add group2
+
   group3 = THREE.SceneUtils.createMultiMaterialObject(geometry3, materials)
   group3.position.x = 0
   group3.rotation.x = 0
   group3.scale = group1.scale
   scene.add group3
+
   renderer = new THREE.WebGLRenderer(antialias: true)
   renderer.setSize window.innerWidth, window.innerHeight
   $(renderer.domElement).appendTo $container
   stats = new Stats()
-  stats.domElement.style.position = "absolute"
-  stats.domElement.style.top = "0px"
+  $stats = $(stats.domElement)
+  $stats.css
+    position: 'absolute'
+    top: 0
   $(stats.domElement).appendTo $container
-  document.addEventListener "mousemove", onDocumentMouseMove, false
+  $(document).mousemove onDocumentMouseMove
 
 onDocumentMouseMove = (event) ->
   mouseX = (event.clientX - windowHalfX)
