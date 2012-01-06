@@ -2,18 +2,15 @@
 #= require jquery_ujs
 #= require jquery-ui-1.8.16-custom-min
 #= require underscore-1.2.3-min
-#= require ember-0.9.3
-#= require functions
+#= require three
+#= require detector
+#= require request_animation_frame
+#= require stats
 #= require_self
-#= require_directory ./models
-#= require_directory ./views
-#= require_directory ./controllers
-#= require games
+#= require 3d
 
 # INITIALISATIONS
 # ---------------
-
-window.Irmingard = Ember.Application.create()
 
 $.ajaxSetup
   'beforeSend': (xhr) ->

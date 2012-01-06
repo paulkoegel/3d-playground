@@ -1,9 +1,15 @@
 !!! 5
 %html{:lang => 'en'}
   %head
-    %meta{:content => 'text/html; charset=utf-8', 'http-equiv' => 'Content-Type'}
     %title 3d playground
+    %meta{:charset => 'utf-8'}
     %link{rel: 'shortcut icon', href: '/favicon.ico'}
-    = stylesheet_link_tag 'application'
+    = stylesheet_link_tag :application
+    = javascript_include_tag :application
+
   %body
     = yield
+
+    #container
+    #info
+      %a{:href => "http://github.com/mrdoob/three.js"} three.js
