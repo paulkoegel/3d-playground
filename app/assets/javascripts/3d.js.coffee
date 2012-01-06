@@ -53,11 +53,11 @@ init = ->
   i           = 0
 
   while i < geometry.faces.length
-    f = geometry.faces[i]
+    f  = geometry.faces[i]
     f2 = geometry2.faces[i]
     f3 = geometry3.faces[i]
-    n = (if (f instanceof THREE.Face3) then 3 else 4)
-    j = 0
+    n  = (if (f instanceof THREE.Face3) then 3 else 4)
+    j  = 0
 
     while j < n
       vertexIndex = f[faceIndices[j]]
