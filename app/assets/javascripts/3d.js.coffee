@@ -8,7 +8,6 @@ scene       = undefined
 renderer    = undefined
 mesh        = undefined
 group1      = undefined
-group2      = undefined
 light       = undefined
 mouseX      = 0
 mouseY      = 0
@@ -35,7 +34,21 @@ render = ->
 
 
 init = ->
+
+  # initialisation stuff
   $container = $('#container')
+  $(document).mousemove onDocumentMouseMove
+
+  stats = new Stats()
+  $stats = $(stats.domElement)
+  $stats.css
+    position: 'absolute'
+    top: 0
+  $(stats.domElement).appendTo $container
+
+  renderer = new THREE.WebGLRenderer(antialias: true)
+  renderer.setSize window.innerWidth, window.innerHeight
+  $(renderer.domElement).appendTo $container
 
   camera = new THREE.PerspectiveCamera(20, window.innerWidth / window.innerHeight, 1, 10000)
   camera.position.z = 1800
@@ -57,27 +70,18 @@ init = ->
   mesh.rotation.x = -90 * Math.PI / 180
   scene.add mesh
 
-  mesh = new THREE.Mesh(shadowGeo, shadowMaterial)
-  mesh.position.y = -250
-  mesh.position.x = 200
-  mesh.rotation.x = -90 * Math.PI / 180
-  scene.add mesh
-
   faceIndices = [ "a", "b", "c", "d" ]
   color       = undefined
   f           = undefined
-  f2          = undefined
   p           = undefined
   n           = undefined
   vertexIndex = undefined
   geometry    = new THREE.IcosahedronGeometry(1)
-  geometry2   = new THREE.IcosahedronGeometry(1)
   i           = 0
 
   while i < geometry.faces.length
     f  = geometry.faces[i]
-    f2 = geometry2.faces[i]
-    n  = (if (f instanceof THREE.Face3) then 3 else 4)
+    n  = 3
     j  = 0
 
     while j < n
@@ -86,9 +90,6 @@ init = ->
       color = new THREE.Color(0xffffff)
       color.setHSV (p.y + 1) / 2, 1.0, 1.0
       f.vertexColors[j] = color
-      color = new THREE.Color(0xffffff)
-      color.setHSV 0.0, (p.y + 1) / 2, 1.0
-      f2.vertexColors[j] = color
       j++
     i++
 
@@ -108,24 +109,6 @@ init = ->
   group1.rotation.x = -1.87
   group1.scale.set 200, 200, 200
   scene.add group1
-
-  group2 = THREE.SceneUtils.createMultiMaterialObject(geometry2, materials)
-  group2.position.x = 200
-  group2.rotation.x = 0
-  group2.scale = group1.scale
-  scene.add group2
-
-  renderer = new THREE.WebGLRenderer(antialias: true)
-  renderer.setSize window.innerWidth, window.innerHeight
-  $(renderer.domElement).appendTo $container
-
-  stats = new Stats()
-  $stats = $(stats.domElement)
-  $stats.css
-    position: 'absolute'
-    top: 0
-  $(stats.domElement).appendTo $container
-  $(document).mousemove onDocumentMouseMove
 
 $ ->
   Detector.addGetWebGLMessage() unless Detector.webgl
