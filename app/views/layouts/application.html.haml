@@ -1,0 +1,9 @@
+!!! 5
+%html{:lang => 'en'}
+  %head
+    %meta{:content => 'text/html; charset=utf-8', 'http-equiv' => 'Content-Type'}
+    %title 3d playground
+    %link{rel: 'shortcut icon', href: '/favicon.ico'}
+    = stylesheet_link_tag 'application'
+  %body
+    = yield

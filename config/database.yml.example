@@ -1,0 +1,20 @@
+development:
+  adapter: mysql2
+  encoding: utf8
+  username: root
+  password:
+  database: irmingard_development
+
+test:
+  adapter: mysql2
+  encoding: utf8
+  username: root
+  password:
+  database: irmingard_test
+
+production:
+  adapter: mysql2
+  encoding: utf8
+  username: root
+  password:
+  database: irmingard_production
