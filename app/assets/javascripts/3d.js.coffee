@@ -1,4 +1,4 @@
-container   = undefined
+$container   = undefined
 stats       = undefined
 camera      = undefined
 scene       = undefined
@@ -14,7 +14,7 @@ windowHalfX = window.innerWidth / 2
 windowHalfY = window.innerHeight / 2
 
 init = ->
-  container = document.getElementById("container")
+  $container = $('#container')
   camera = new THREE.PerspectiveCamera(20, window.innerWidth / window.innerHeight, 1, 10000)
   camera.position.z = 1800
   scene = new THREE.Scene()
@@ -100,12 +100,13 @@ init = ->
   scene.add group3
   renderer = new THREE.WebGLRenderer(antialias: true)
   renderer.setSize window.innerWidth, window.innerHeight
-  container.appendChild renderer.domElement
+  $(renderer.domElement).appendTo $container
   stats = new Stats()
   stats.domElement.style.position = "absolute"
   stats.domElement.style.top = "0px"
-  container.appendChild stats.domElement
+  $(stats.domElement).appendTo $container
   document.addEventListener "mousemove", onDocumentMouseMove, false
+
 onDocumentMouseMove = (event) ->
   mouseX = (event.clientX - windowHalfX)
   mouseY = (event.clientY - windowHalfY)
