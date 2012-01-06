@@ -9,7 +9,6 @@ renderer    = undefined
 mesh        = undefined
 group1      = undefined
 group2      = undefined
-group3      = undefined
 light       = undefined
 mouseX      = 0
 mouseY      = 0
@@ -54,18 +53,13 @@ init = ->
 
   mesh = new THREE.Mesh(shadowGeo, shadowMaterial)
   mesh.position.y = -250
+  mesh.position.x = -200
   mesh.rotation.x = -90 * Math.PI / 180
   scene.add mesh
 
   mesh = new THREE.Mesh(shadowGeo, shadowMaterial)
   mesh.position.y = -250
-  mesh.position.x = -400
-  mesh.rotation.x = -90 * Math.PI / 180
-  scene.add mesh
-
-  mesh = new THREE.Mesh(shadowGeo, shadowMaterial)
-  mesh.position.y = -250
-  mesh.position.x = 400
+  mesh.position.x = 200
   mesh.rotation.x = -90 * Math.PI / 180
   scene.add mesh
 
@@ -73,19 +67,16 @@ init = ->
   color       = undefined
   f           = undefined
   f2          = undefined
-  f3          = undefined
   p           = undefined
   n           = undefined
   vertexIndex = undefined
   geometry    = new THREE.IcosahedronGeometry(1)
   geometry2   = new THREE.IcosahedronGeometry(1)
-  geometry3   = new THREE.IcosahedronGeometry(1)
   i           = 0
 
   while i < geometry.faces.length
     f  = geometry.faces[i]
     f2 = geometry2.faces[i]
-    f3 = geometry3.faces[i]
     n  = (if (f instanceof THREE.Face3) then 3 else 4)
     j  = 0
 
@@ -98,9 +89,6 @@ init = ->
       color = new THREE.Color(0xffffff)
       color.setHSV 0.0, (p.y + 1) / 2, 1.0
       f2.vertexColors[j] = color
-      color = new THREE.Color(0xffffff)
-      color.setHSV 0.125 * vertexIndex / geometry.vertices.length, 1.0, 1.0
-      f3.vertexColors[j] = color
       j++
     i++
 
@@ -116,22 +104,16 @@ init = ->
   ) ]
 
   group1 = THREE.SceneUtils.createMultiMaterialObject(geometry, materials)
-  group1.position.x = -400
+  group1.position.x = -200
   group1.rotation.x = -1.87
   group1.scale.set 200, 200, 200
   scene.add group1
 
   group2 = THREE.SceneUtils.createMultiMaterialObject(geometry2, materials)
-  group2.position.x = 400
+  group2.position.x = 200
   group2.rotation.x = 0
   group2.scale = group1.scale
   scene.add group2
-
-  group3 = THREE.SceneUtils.createMultiMaterialObject(geometry3, materials)
-  group3.position.x = 0
-  group3.rotation.x = 0
-  group3.scale = group1.scale
-  scene.add group3
 
   renderer = new THREE.WebGLRenderer(antialias: true)
   renderer.setSize window.innerWidth, window.innerHeight
