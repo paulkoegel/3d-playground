@@ -1,4 +1,7 @@
-$container   = undefined
+# VARIABLES
+# ---------
+
+$container  = undefined
 stats       = undefined
 camera      = undefined
 scene       = undefined
@@ -12,6 +15,25 @@ mouseX      = 0
 mouseY      = 0
 windowHalfX = window.innerWidth / 2
 windowHalfY = window.innerHeight / 2
+
+# HELPER
+# ------
+
+onDocumentMouseMove = (event) ->
+  mouseX = (event.clientX - windowHalfX)
+  mouseY = (event.clientY - windowHalfY)
+
+animate = ->
+  requestAnimationFrame animate
+  render()
+  stats.update()
+
+render = ->
+  camera.position.x += (mouseX - camera.position.x) * 0.05
+  camera.position.y += (-mouseY - camera.position.y) * 0.05
+  camera.lookAt scene.position
+  renderer.render scene, camera
+
 
 init = ->
   $container = $('#container')
@@ -114,6 +136,7 @@ init = ->
   renderer = new THREE.WebGLRenderer(antialias: true)
   renderer.setSize window.innerWidth, window.innerHeight
   $(renderer.domElement).appendTo $container
+
   stats = new Stats()
   $stats = $(stats.domElement)
   $stats.css
@@ -122,23 +145,8 @@ init = ->
   $(stats.domElement).appendTo $container
   $(document).mousemove onDocumentMouseMove
 
-onDocumentMouseMove = (event) ->
-  mouseX = (event.clientX - windowHalfX)
-  mouseY = (event.clientY - windowHalfY)
-
-animate = ->
-  requestAnimationFrame animate
-  render()
-  stats.update()
-
-render = ->
-  camera.position.x += (mouseX - camera.position.x) * 0.05
-  camera.position.y += (-mouseY - camera.position.y) * 0.05
-  camera.lookAt scene.position
-  renderer.render scene, camera
-
-Detector.addGetWebGLMessage() unless Detector.webgl
-
 $ ->
+  Detector.addGetWebGLMessage() unless Detector.webgl
+
   init()
   animate()
