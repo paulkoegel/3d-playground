@@ -44,12 +44,12 @@ init = ->
   $stats.css
     position: 'absolute'
     top: 0
-  $(stats.domElement).appendTo $container
+  $container.append $(stats.domElement)
 
   # RENDERER
   renderer = new THREE.WebGLRenderer(antialias: true)
   renderer.setSize window.innerWidth, window.innerHeight
-  $(renderer.domElement).appendTo $container
+  $container.append $(renderer.domElement)
 
   # CAMERA
   camera = new THREE.PerspectiveCamera(20, window.innerWidth / window.innerHeight, 1, 10000)
@@ -63,7 +63,7 @@ init = ->
 
   scene.add light
 
-  shadowMaterial = new THREE.MeshBasicMaterial(map: THREE.ImageUtils.loadTexture("textures/shadow.png"))
+  shadowMaterial = new THREE.MeshBasicMaterial(map: THREE.ImageUtils.loadTexture("/assets/shadow.png"))
   shadowGeo = new THREE.PlaneGeometry 300, 300, 1, 1
 
   mesh = new THREE.Mesh shadowGeo, shadowMaterial
