@@ -110,6 +110,27 @@ init = ->
 
   scene.add light
 
+  axisLength = 350
+  material = new THREE.LineBasicMaterial(color: 0xff0000)
+  geometry = new THREE.Geometry()
+  geometry.vertices.push new THREE.Vertex(new THREE.Vector3(-axisLength, 0, 0)), new THREE.Vertex(new THREE.Vector3(axisLength, 0, 0))
+  line = new THREE.Line(geometry, material)
+  scene.add line
+
+  material = new THREE.LineBasicMaterial(color: 0x00ff00)
+  geometry = new THREE.Geometry()
+  geometry.vertices.push new THREE.Vertex(new THREE.Vector3(0, -axisLength, 0)), new THREE.Vertex(new THREE.Vector3(0, axisLength, 0))
+  line = new THREE.Line(geometry, material)
+  scene.add line
+
+  material = new THREE.LineBasicMaterial(color: 0x0000ff)
+  geometry = new THREE.Geometry()
+  geometry.vertices.push new THREE.Vertex(new THREE.Vector3(0, 0, -axisLength)), new THREE.Vertex(new THREE.Vector3(0, 0, axisLength))
+  line = new THREE.Line(geometry, material)
+  scene.add line
+
+
+
   planeGeo = new THREE.PlaneGeometry(100, 300, 10, 10)
   planeMat = new THREE.MeshLambertMaterial(
     color: 0xdd2222
