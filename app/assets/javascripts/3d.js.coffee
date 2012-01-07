@@ -27,8 +27,12 @@ animate = ->
   stats.update()
 
 render = ->
-  camera.position.x += (mouseX - camera.position.x) * 0.05
-  camera.position.y += (-mouseY - camera.position.y) * 0.05
+  camera.position.x += (10*mouseX - camera.position.x) * 1.05
+  camera.position.y += (-5*mouseY - camera.position.y) * 0.05
+  if camera.position.z > 5000
+    camera.position.z -= (mouseX - camera.position.x) * 0.01
+  else
+    camera.position.z += (mouseX - camera.position.x) * 0.01
   camera.lookAt scene.position
   renderer.render scene, camera
 
@@ -50,6 +54,8 @@ init = ->
   renderer = new THREE.WebGLRenderer(antialias: true)
   renderer.setSize window.innerWidth, window.innerHeight
   $container.append $(renderer.domElement)
+  #renderer.setClearColorHex(0xEEEEEE, 1.0)
+  renderer.clear()
 
   # CAMERA
   camera = new THREE.PerspectiveCamera(20, window.innerWidth / window.innerHeight, 1, 10000)
