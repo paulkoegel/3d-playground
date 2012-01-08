@@ -1,14 +1,4 @@
 GIT
-  remote: git://github.com/chriseppstein/compass
-  revision: bffba483754cb9381fa51efd8e2a1f0482a21ac6
-  branch: master
-  specs:
-    compass (0.12.alpha.4.bffba48)
-      chunky_png (~> 1.2)
-      fssm (>= 0.2.7)
-      sass (~> 3.1)
-
-GIT
   remote: git://github.com/thoughtbot/shoulda-matchers.git
   revision: 25c2623bb9d96cf6a446ecc141fdfefe5c4860fa
   specs:
@@ -57,6 +47,10 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.2.0)
+    compass (0.12.alpha.4)
+      chunky_png (~> 1.2)
+      fssm (>= 0.2.7)
+      sass (~> 3.1)
     diff-lcs (1.1.3)
     erubis (2.7.0)
     execjs (1.2.13)
@@ -157,8 +151,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  coffee-rails (~> 3.1.0)
-  compass!
+  coffee-rails (~> 3.1.1)
+  compass (~> 0.12.alpha)
   haml
   heroku
   jquery-rails
@@ -169,4 +163,4 @@ DEPENDENCIES
   shoulda-matchers!
   simplecov
   turn
-  uglifier
+  uglifier (>= 1.0.3)
