@@ -105,12 +105,12 @@ canvas {
     // Mouse wheel: Zoom 5%
     // IE, Webkit, Opera
     document.addEventListener('mousewheel', function(evt) {
-      camera.position.x *= 1 - evt.wheelDelta/800;
+      camera.position.x *= 1 + evt.wheelDelta/800;
       render();
     }, false);
     // Firefox
     window.addEventListener('DOMMouseScroll', function(evt) {
-      camera.position.x *= 1 - evt.detail/800;
+      camera.position.x *= 1 + evt.detail/800;
       render();
     }, false);
     
