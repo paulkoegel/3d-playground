@@ -1,7 +1,7 @@
 - content_for :javascript do
   = javascript_include_tag '/assets/jquery'
   = javascript_include_tag '/assets/request_animation_frame'
-  =# javascript_include_tag '/assets/glMatrix-0.9.5.min.js'
+  = javascript_include_tag '/assets/glMatrix-0.9.5.min.js'
   %script#shader-fs{type: 'x-shader/x-fragment'}
     :erb
       precision mediump float;
@@ -26,4 +26,4 @@
 hello from WebGl.haml
 
 #container
-  %canvas.webgl
+  %canvas#webgl
