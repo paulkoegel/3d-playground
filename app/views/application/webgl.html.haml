@@ -1,0 +1,29 @@
+- content_for :javascript do
+  = javascript_include_tag '/assets/jquery'
+  = javascript_include_tag '/assets/request_animation_frame'
+  =# javascript_include_tag '/assets/glMatrix-0.9.5.min.js'
+  %script#shader-fs{type: 'x-shader/x-fragment'}
+    :erb
+      precision mediump float;
+
+      void main(void) {
+        gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+      }
+
+  %script#shader-vs{type: 'x-shader/x-vertex'}
+    :erb
+      attribute vec3 aVertexPosition;
+
+      uniform mat4 uMVMatrix;
+      uniform mat4 uPMatrix;
+
+      void main(void) {
+        gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+      }
+
+  = javascript_include_tag '/assets/webgl'
+  
+hello from WebGl.haml
+
+#container
+  %canvas.webgl

@@ -1,6 +1,7 @@
 Irmingard::Application.routes.draw do
 
   root :to => 'application#index'
+  get 'webgl' => 'application#webgl'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
